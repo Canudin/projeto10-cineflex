@@ -1,25 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import styled from "styled-components";
+import Header from "./Components/Header";
+import Footer from "./Components/Footer";
+import Content from "./Components/Content";
 
-function App() {
+export default function App() {
+  const movie = ["a", "b"]
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <Header />
+      <Content />
+      <Footer />
+    </Container>
   );
 }
 
-export default App;
+const Container = styled.div`
+  width: 100vw;
+  height: 100vh;
+`;
