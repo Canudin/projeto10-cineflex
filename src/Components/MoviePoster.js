@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
-export default function MoviePoster() {
-  const hello = (name) => {}
-  const hello2 = name => {}
+export default function MoviePoster(props) {
+  const {title, id, posterURL} = props
+  console.log(props)
   return (
     <PostersContainer>
       <PosterFrame>
-        <PosterImage />
+        <PosterImage src={posterURL}/>
       </PosterFrame>
     </PostersContainer>
   );
@@ -23,6 +23,13 @@ const PosterFrame = styled.div`
   background-color: white;
   box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.1);
   border-radius: 3px;
+  margin: 20px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
-const PosterImage = styled.img``;
+const PosterImage = styled.img`
+  width: 129px;
+  height: 193px;
+`;
