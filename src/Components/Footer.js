@@ -1,12 +1,20 @@
-import styled from 'styled-components';
+import { useState } from "react";
+import styled from "styled-components";
 
 export default function Footer(props) {
-  return (
-    <FooterContainer>
-      <FooterImg/>
-      <FooterTitle>a</FooterTitle>
-    </FooterContainer>
-  );
+  if (Object.keys(props).length !== 0) {
+    const { id, overview, posterURL, releaseDate, title } = props.movie;
+    return (
+      <FooterContainer>
+        <FooterImgFrame>
+          <FooterImg src={posterURL} />
+        </FooterImgFrame>
+        <FooterTextContainer>
+          <FooterTitle>{title}</FooterTitle>
+        </FooterTextContainer>
+      </FooterContainer>
+    );
+  }
 }
 const FooterContainer = styled.div`
   width: 100vw;
@@ -18,15 +26,36 @@ const FooterContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
 `;
 
+const FooterImgFrame = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 89px;
+  left: 10px;
+  bottom: 14px;
+  background: #ffffff;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  margin-left: 10px;
+`;
 const FooterImg = styled.img`
-`
+  width: 48px;
+  height: 72px;
+`;
+
+const FooterTextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 const FooterTitle = styled.p`
+  margin-left: 15px;
+  margin-right: 10px;
   text-decoration: none;
-  font-size: 26px;
+  font-size: 20px;
   font-family: "Roboto", sans-serif;
-  color: #FFFFFF;
+  color: #ffffff;
 `;
