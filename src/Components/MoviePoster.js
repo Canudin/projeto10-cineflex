@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export default function MoviePoster(props) {
   const {title, id, posterURL} = props
-  console.log(props)
   return (
     <PostersContainer>
       <PosterFrame>

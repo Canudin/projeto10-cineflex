@@ -1,13 +1,17 @@
 import styled from "styled-components";
 import MoviePoster from "./MoviePoster";
+import {Link} from "react-router-dom"
 
-export default function Content(props) {
+export default function MainContent(props) {
   const { movies } = props;
-  console.log(movies)
   return (
     <ContentContainer>
       {movies.map((movie) => {
-        return <MoviePoster title={movie.title} id={movie.id} posterURL={movie.posterURL} />;
+        return (
+          <Link to={`/sessoes/${movie.id}`}>
+            <MoviePoster title={movie.title} id={movie.id} posterURL={movie.posterURL} />
+          </Link>
+        );
       })}
     </ContentContainer>
   );

@@ -1,13 +1,16 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export default function Header(props) {
   return (
     <HeaderContainer>
       <TitleContainer>
-        <Title>CINEFLEX</Title>
+        <Link to={`/`}>
+          <Title>CINEFLEX</Title>
+        </Link>
       </TitleContainer>
       <HeaderAction>
-        <p>Selecione o filme</p>
+        <p>{props.headerAction}</p>
       </HeaderAction>
     </HeaderContainer>
   );
