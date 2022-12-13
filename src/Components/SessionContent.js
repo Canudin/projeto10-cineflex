@@ -4,6 +4,11 @@ import styled from "styled-components";
 import SeatContainer from "./SeatContainer";
 
 export default function SessionContent(props) {
+  function submit(event) {
+    event.preventDefault();
+    console.log(nome, cpf, selectedSeats);
+  }
+
   const chosenSession = props.chosenSession;
   const [sessionSeats, setSessionSeats] = useState({
     id: "",
@@ -13,6 +18,9 @@ export default function SessionContent(props) {
     seats: [],
   });
   const { id, name, day, movie, seats } = sessionSeats;
+  const [selectedSeats, setSelectedSeats] = useState([]);
+  const [nome, setNome] = useState("");
+  const [cpf, setCpf] = useState("");
 
   useEffect(() => {
     const promisse = axios.get(
@@ -22,12 +30,18 @@ export default function SessionContent(props) {
     return () => {};
   }, []);
 
-  console.log(id, name, day, movie, seats);
+  // console.log(id, name, day, movie, seats);
   return (
     <SessionContainer>
       <SeatsContainer>
         {seats.map((seat) => {
-          return <SeatContainer seat={seat} />;
+          return (
+            <SeatContainer
+              seat={seat}
+              selectedSeats={selectedSeats}
+              setSelectedSeats={setSelectedSeats}
+            />
+          );
         })}
       </SeatsContainer>
       <LegendsContainer>
@@ -44,13 +58,23 @@ export default function SessionContent(props) {
           <p>Indisponível</p>
         </LegendContainer>
       </LegendsContainer>
-      <InputContainer>
+      <InputContainer onSubmit={submit}>
         <p>Nome do comprador:</p>
-        <input type="text" placeholder="Digite seu nome..."></input>
+        <input
+          value={nome}
+          type="text"
+          placeholder="Digite seu nome..."
+          onChange={(content) => setNome(content.target.value)}
+        ></input>
         <p>CPF do Comprador:</p>
-        <input type="number" placeholder="Digite seu CPF..."></input>
+        <input
+          value={cpf}
+          type="number"
+          placeholder="Digite seu CPF..."
+          onChange={(content) => setCpf(content.target.value)}
+        ></input>
+        <CheckOut type="submit">Reservar assento(s)</CheckOut>
       </InputContainer>
-      <CheckOut>Reservar assento(s)</CheckOut>
     </SessionContainer>
   );
 }
@@ -98,7 +122,7 @@ const Legend = styled.div`
   }
 `;
 
-const InputContainer = styled.div`
+const InputContainer = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;

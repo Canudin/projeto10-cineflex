@@ -19,7 +19,6 @@ export default function MainContent(props) {
 
 const ContentContainer = styled.div`
   min-height: calc(100vh - 67px - 110px);
-  margin-bottom: 117px;
   background-color: #293241;
   display: flex;
   flex-wrap: wrap;

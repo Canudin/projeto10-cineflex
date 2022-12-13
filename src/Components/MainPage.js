@@ -8,7 +8,6 @@ export default function MainPage(props) {
     <>
       <Header headerAction={props.headerAction}/>
       <MainContent movies={movies} />
-      <Footer />
     </>
   );
 }
