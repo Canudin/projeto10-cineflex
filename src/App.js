@@ -9,9 +9,8 @@ import SessionPage from "./Components/SessionPage";
 
 export default function App() {
   const [movies, setMovies] = useState([]);
-  const [chosenMovieSessions, setChosenMovieSessions] = useState([]);
   const [headerAction, setHeaderAction] = useState("Selecione o filme");
-  const [chosenSessionId, setChosenSessionId] = useState(null);
+  const [chosenSession, setChosenSession] = useState(null);
 
   useEffect(() => {
     const promisse = axios.get("https://mock-api.driven.com.br/api/v8/cineflex/movies");
@@ -27,26 +26,14 @@ export default function App() {
             return (
               <Route
                 path={`/sessoes/${item.id}`}
-                element={
-                  <MoviePage
-                    movie={item}
-                    setChosenSessionId={setChosenSessionId}
-                    chosenMovieSessions={chosenMovieSessions}
-                    setChosenMovieSessions={setChosenMovieSessions}
-                  />
-                }
+                element={<MoviePage movie={item} setChosenSession={setChosenSession} setHeaderAction={setHeaderAction} headerAction={headerAction}/>}
               />
             );
           })}
-          {chosenMovieSessions.map((item) => {
-            console.log(item)
-            return (
-              <Route
-                path={`/assentos/${item}`}
-                element={<SessionPage movies={movies} />}
-              />
-            );
-          })}
+          <Route
+            path={`/assentos/${chosenSession}`}
+            element={<SessionPage movies={movies} chosenSession={chosenSession} setHeaderAction={setHeaderAction} headerAction={headerAction}/>}
+          />
           {/* <Route path="/sucesso" element={<MainPage movies={movies} />} /> */}
         </Routes>
       </Container>

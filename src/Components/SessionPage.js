@@ -2,13 +2,14 @@ import Header from "./Header";
 import Footer from "./Footer";
 import SessionContent from "./SessionContent";
 
-export default function MainPage(props) {
-  const {movie, sessionId} = props;
+export default function SessionPage(props) {
+  const { movies, chosenSession, setHeaderAction, headerAction } = props;
+  setHeaderAction("Selecione o(s) assento(s)");
   return (
     <>
-      <Header headerAction={"Selecione o(s) assento(s)"} />
-      <SessionContent sessionId={sessionId}></SessionContent>
-      <Footer movie={movie} />
+      <Header headerAction={headerAction} />
+      <SessionContent chosenSession={chosenSession}></SessionContent>
+      <Footer movie={movies} />
     </>
   );
 }

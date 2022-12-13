@@ -5,11 +5,8 @@ import axios from "axios";
 
 export default function MovieContent(props) {
   const { id, overview, posterURL, releaseDate, title } = props.movie;
-  const setChosenSessionId = props.setChosenSessionId;
-  const chosenMovieSessions = props.chosenMovieSessions;
-  const setChosenMovieSessions = props.setChosenMovieSessions;
+  const setChosenSession = props.setChosenSession;
   const [days, setDays] = useState([]);
-  let movieIds = []
 
 
   useEffect(() => {
@@ -19,7 +16,6 @@ export default function MovieContent(props) {
     promisse.then((answer) => {
       setDays(answer.data.days);
     });
-    setChosenMovieSessions(movieIds)
     return () => {};
   }, []);
 
@@ -27,8 +23,6 @@ export default function MovieContent(props) {
     <MovieContainer>
       {days.map((day) => {
         const { id, weekday, date, showtimes } = day;
-        showtimes.map((item) => {movieIds = [...movieIds, item.id];})
-        console.log(movieIds)
         return (
           <SessionContainer>
             <SessionDay>
@@ -39,7 +33,7 @@ export default function MovieContent(props) {
                 const { name, id } = showtime;
                 return (
                   <Link to={`/assentos/${id}`}>
-                    <SessionHour onClick={setChosenSessionId(id)}>{name}</SessionHour>
+                    <SessionHour onClick={() => {setChosenSession(id)}}>{name}</SessionHour>
                   </Link>
                 );
               })}
@@ -53,6 +47,7 @@ export default function MovieContent(props) {
 
 const MovieContainer = styled.div`
   margin-top: 20px;
+  margin-bottom: 117px;
 `;
 
 const SessionContainer = styled.div`

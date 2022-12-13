@@ -3,16 +3,12 @@ import Footer from "./Footer";
 import MovieContent from "./MovieContent";
 
 export default function MainPage(props) {
-  const { movie, setChosenSessionId, setChosenMovieSessions, chosenMovieSessions } = props;
+  const { movie, setChosenSession, setHeaderAction, headerAction } = props;
+  setHeaderAction("Selecione o horário");
   return (
     <>
-      <Header headerAction={"Selecione o horário"} />
-      <MovieContent
-        movie={movie}
-        setChosenSessionId={setChosenSessionId}
-        chosenMovieSessions={chosenMovieSessions}
-        setChosenMovieSessions={setChosenMovieSessions}
-      ></MovieContent>
+      <Header headerAction={headerAction} />
+      <MovieContent movie={movie} setChosenSession={setChosenSession}></MovieContent>
       <Footer movie={movie} />
     </>
   );
