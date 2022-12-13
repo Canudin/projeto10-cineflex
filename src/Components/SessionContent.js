@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
 import SeatContainer from "./SeatContainer";
@@ -14,26 +15,42 @@ export default function SessionContent(props) {
   });
   const { id, name, day, movie, seats } = sessionSeats;
   const [selectedSeats, setSelectedSeats] = useState([]);
-  const [nome, setNome] = useState("");
-  const [cpf, setCpf] = useState("");
+  const { nome, setNome, cpf, setCpf, setChosenMovie } = props;
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const promisse = axios.get(
-      `https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${chosenSession}/seats`
-    );
-    promisse.then((answer) => setSessionSeats(answer.data));
+    if (chosenSession) {
+      const promisse = axios.get(
+        `https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${chosenSession}/seats`
+      );
+      promisse.then((answer) => setSessionSeats(answer.data));
+    } else {
+      // const urlId = useParams;
+      // console.log(urlId)
+      // const promisse = axios.get(
+      //   `https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${chosenSession}/seats`
+      // );
+      // promisse.then((answer) => setSessionSeats(answer.data));
+    }
     return () => {};
   }, []);
 
   function submit(event) {
     event.preventDefault();
-    const getSelectedSeatsID = selectedSeats.map((selectedSeat) => {return selectedSeat.id});
-    const postSelectedSeats = {ids: getSelectedSeatsID, name: nome, cpf: cpf}
-    console.log(postSelectedSeats);
-    // axios.post("https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many", )
+    const getSelectedSeatsID = selectedSeats.map((selectedSeat) => {
+      return selectedSeat.id;
+    });
+    const postSelectedSeats = { ids: getSelectedSeatsID, name: nome, cpf: cpf };
+    const request = axios.post(
+      "https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many",
+      postSelectedSeats
+    );
+    request.then(() => {
+      setChosenMovie(movie);
+      navigate("/sucesso");
+      console.log(request);
+    });
   }
-
-  // console.log(id, name, day, movie, seats);
   return (
     <SessionContainer>
       <SeatsContainer>

@@ -3,12 +3,35 @@ import Footer from "./Footer";
 import SessionContent from "./SessionContent";
 
 export default function SessionPage(props) {
-  const { movies, chosenSession, setHeaderAction, headerAction } = props;
+  const {
+    movies,
+    chosenSession,
+    setHeaderAction,
+    headerAction,
+    chosenMovie,
+    setChosenMovie,
+    chosenSeats,
+    setChosenSeats,
+    nome,
+    setNome,
+    cpf,
+    setCpf,
+  } = props;
   setHeaderAction("Selecione o(s) assento(s)");
   return (
     <>
       <Header headerAction={headerAction} />
-      <SessionContent chosenSession={chosenSession}></SessionContent>
+      <SessionContent
+        chosenMovie={chosenMovie}
+        setChosenMovie={setChosenMovie}
+        chosenSession={chosenSession}
+        chosenSeats={chosenSeats}
+        setChosenSeats={setChosenSeats}
+        nome={nome}
+        setNome={setNome}
+        cpf={cpf}
+        setCpf={setCpf}
+      ></SessionContent>
       <Footer movie={movies} />
     </>
   );

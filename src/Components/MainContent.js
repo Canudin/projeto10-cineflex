@@ -9,7 +9,7 @@ export default function MainContent(props) {
       {movies.map((movie) => {
         return (
           <Link to={`/sessoes/${movie.id}`}>
-            <MoviePoster title={movie.title} id={movie.id} posterURL={movie.posterURL} />
+            <MoviePoster title={movie.title} id={movie.id} posterURL={movie.posterURL}/>
           </Link>
         );
       })}
