@@ -60,6 +60,3 @@ const SeatContent = styled.div`
     font-size: 11px;
   }
 `;
-
-// background: #FBE192;
-// border: ;

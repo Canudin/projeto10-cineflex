@@ -4,11 +4,6 @@ import styled from "styled-components";
 import SeatContainer from "./SeatContainer";
 
 export default function SessionContent(props) {
-  function submit(event) {
-    event.preventDefault();
-    console.log(nome, cpf, selectedSeats);
-  }
-
   const chosenSession = props.chosenSession;
   const [sessionSeats, setSessionSeats] = useState({
     id: "",
@@ -30,6 +25,14 @@ export default function SessionContent(props) {
     return () => {};
   }, []);
 
+  function submit(event) {
+    event.preventDefault();
+    const getSelectedSeatsID = selectedSeats.map((selectedSeat) => {return selectedSeat.id});
+    const postSelectedSeats = {ids: getSelectedSeatsID, name: nome, cpf: cpf}
+    console.log(postSelectedSeats);
+    // axios.post("https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many", )
+  }
+
   // console.log(id, name, day, movie, seats);
   return (
     <SessionContainer>
@@ -50,11 +53,11 @@ export default function SessionContent(props) {
           <p>Selecionado</p>
         </LegendContainer>
         <LegendContainer>
-          <Legend bgcolor={"#FBE192"} borderColor={"1px solid #F7C52B"} />
+          <Legend bgcolor={"#c3cfd9"} borderColor={"1px solid #808f9d"} />
           <p>Disponível</p>
         </LegendContainer>
         <LegendContainer>
-          <Legend bgcolor={"#c3cfd9"} borderColor={"1px solid #808f9d"} />
+          <Legend bgcolor={"#FBE192"} borderColor={"1px solid #F7C52B"} />
           <p>Indisponível</p>
         </LegendContainer>
       </LegendsContainer>
